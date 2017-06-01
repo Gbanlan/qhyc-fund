@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;min-width: 1366px;min-height: 768px;"  id="ng-app" ng-app="tradeApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="commonjs/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="commonjs/angular.js"></script>
+    <script src="commonjs/echarts.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <script src="js/index.js"></script>
+</head>
+<body style="height: 98%;background:#292727;padding: 0px 0px 0px 0px;font-family: Microsoft YaHei;color: #B1AEAE;" ng-controller="tradeCtrl">
+    <div style="width: 100%;height: 4%;background:#000000;min-height: 40px;">
+        <div class="headCss selectHeadCss" ng-click="switchCheckMenu($event, 'logo')">logo</div>
+        <div class="headCss" ng-click="switchCheckMenu($event, '1')">个人中心</div>
+        <div class="headCss" ng-click="switchCheckMenu($event, '2')">新闻</div>
+        <div class="headCss" ng-click="switchCheckMenu($event, '3')">账户出入金</div>
+        <div class="headCss" ng-click="switchCheckMenu($event, '4')">交易规则</div>
+        <div class="headCss_right">时间：<span ng-bind="timelyTime"></span></div>
+        <div class="headCss_right">用户帐号：66666666</div>
+        <div class="headCss_right">用户姓名：admin</div>
+
+
+    </div>
+    <div style="width: 100%;;height: 95%; background: url('pic/6.jpg')">
+        <div style="height:50%;">
+            <div style="float: left;width: 24%;height: 100%">
+                <div style="height: 96%;;margin-top: 2%">
+                    <div style="height: 8%;">
+                        <div class="top_left_div"  style="">商品栏</div>
+                    </div>
+                    <div id="topLeftTableDiv" style="height: 90%;">
+                        <table border="0" cellspacing="0" cellpadding="0" style=";width:100%;" align="center">
+                            <tr class="top_left_table_tr">
+                                <th class="top_left_table_th" style="border-left: 0px #ffffff solid">商品名称</th>
+                                <th class="top_left_table_th">最新价格</th>
+                                <th class="top_left_table_th">交易时间</th>
+                            </tr>
+                            <tr class="top_left_table_tr" ng-repeat="commodity in commoditys">
+                                <td ng-bind="commodity.name" ></td>
+                                <td ng-bind="commodity.price" ng-class="{true:'redColorStyle',false:'greenColorStyle'}[commodity.price>50]"></td>
+                                <td ng-bind="commodity.tradeTime"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div style="float: left;width: 55%;height: 100%;margin-left: 0.5%">
+                <div id="topCenterLineChart" style="height: 96%;;margin-top: 1%">
+
+                </div>
+            </div>
+            <div style="float: left;width: 20%;height: 100%;margin-left: 0.5%;">
+
+                <div style="height: 96%;;margin-top: 2.5%">
+                    <div>
+                        <table border="0" cellspacing="0" cellpadding="0" style=";width:100%;" align="center">
+                            <tr class="top_right_table_tr">
+                                <td class="goldColorStyle"style="font-size: 20px;" colspan="4">美原油</td>
+                            </tr>
+                            <tr class="top_right_table_tr">
+                                <td>卖出</td>
+                                <td class="redColorStyle">1222</td>
+                                <td class="goldColorStyle">545</td>
+                                <td></td>
+
+                            </tr>
+                            <tr class="top_right_table_tr tableLine">
+                                <td>买入</td>
+                                <td class="redColorStyle">1222</td>
+                                <td class="goldColorStyle">545</td>
+                                <td></td>
+                            </tr>
+                            <tr class="top_right_table_tr" ng-repeat="handicap in handicaps">
+                                <td ng-bind="handicap.fistTd"></td>
+                                <td ng-bind="handicap.secondTd" ng-class="{true:'redColorStyle',false:'greenColorStyle'}[handicap.secondTd>50]"></td>
+                                <td ng-bind="handicap.thirdTd"></td>
+                                <td ng-bind="handicap.fourthTd" ng-class="{true:'redColorStyle',false:'greenColorStyle'}[handicap.fourthTd>50]"></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div style="height:50%;">
+            <div style="float: left;width: 24%;height: 100%;min-height: 300px;">
+                <div style="height: 100%;">
+
+                    <div class="bottom_left_head_css" style="">
+                        <div class="goldColorStyle" style="font-size: 20px;margin:0 auto;width: 20%;">美原油</div>
+                    </div>
+                    <div style="height:70%;border: 1px rgba(0,0,0,0) solid;">
+                        <div style="height:20%;margin-top: 10%;min-height: 40px;">
+                            <div style=";height: 40px;float: left; text-align: center;margin-left: 8%">
+                                <div style="font-size: 14px;margin-top: 26px;">保证金:</div>
+                            </div>
+                            <div style=";height: 40px;text-align: center;float: left;width: 25.3%;">
+                                <div class="goldBooderColorStyle howmanytrand howmanytrandselect" ng-click="switchCheckTrade($event, '1')">
+                                    1400/手
+                                </div>
+                            </div>
+                            <div style="height: 40px;text-align: center;float: left;width: 25.3%;">
+                                <div class="goldBooderColorStyle howmanytrand" ng-click="switchCheckTrade($event, '2')">
+                                    1960/手
+                                </div>
+                            </div>
+                            <div style="height: 40px;text-align: center;float: left;width: 25.3%;">
+                                <div class="goldBooderColorStyle howmanytrand" ng-click="switchCheckTrade($event, '3')">
+                                    3360/手
+                                </div>
+                            </div>
+                        </div>
+                        <div style=";height: 10%;">
+                            <div style="height:15px;width:70%;margin: 0 auto;font-size: 16px;;text-align: center;">
+                                <span>市场价格:</span>
+                                <span class="goldColorStyle">141312</span>
+                            </div>
+                        </div>
+                        <div style="height:100px;">
+                            <div class="bigbtn_buy_up bigbtn_buy_up_hover" ng-click="buyUpOrDown($event,'up')">买涨</div>
+
+                            <div class="bigbtn_buy_down bigbtn_buy_down_hover" ng-click="buyUpOrDown($event,'down')">买跌</div>
+                        </div>
+                        <div style="height:20px;">
+                            <div style="float: left;margin-left: 10%"><input type="checkbox" checked></div>
+                            <div style="float: left;margin-left: 10px;font-size: 16px;">快速买入</div>
+                            <div style="float: left;margin-left: 30%"><input type="checkbox" checked></div>
+                            <div style="float: left;margin-left: 10px;font-size: 16px;">自动平仓</div>
+                        </div>
+                    </div>
+                    <div style="height:15%;border: 1px rgba(0,0,0,0) solid;">
+                        <div style="font-size: 20px;">
+                            <div class="bigbtn_submit">确认交易</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div style="float: left;width: 55.5%;height: 100%;margin-left: 0.5%;">
+                <div style="height: 100%;">
+                    <div style="height:10%;font-size: 14px;;min-height: 40px;">
+                        <div class="goldColorStyle bottom_center_head_info" >平仓盈亏:</div>
+                        <div  class="bottom_center_head_info_postion">
+                            <div class="bottom_center_head_info_num">666</div>
+                        </div>
+                        <div class="goldColorStyle bottom_center_head_info">浮动盈亏:</div>
+                        <div class="bottom_center_head_info_postion">
+                            <div class="bottom_center_head_info_num">666</div>
+                        </div>
+                        <div class="goldColorStyle bottom_center_head_info">可用资金:</div>
+                        <div class="bottom_center_head_info_postion">
+                            <div class="bottom_center_head_info_num">666</div>
+                        </div>
+                        <div class="goldColorStyle bottom_center_head_info">占用保证金:</div>
+                        <div class="bottom_center_head_info_postion">
+                            <div class="bottom_center_head_info_num">666</div>
+                        </div>
+                        <div class="goldColorStyle bottom_center_head_info">投资收益:</div>
+                        <div class="bottom_center_head_info_postion">
+                            <div class="bottom_center_head_info_num">666</div>
+                        </div>
+                    </div>
+                    <div style="height:90%;">
+                        <div style="height: 8%;border: 1px rgba(0,0,0,0) solid;min-height: 40px;">
+                            <div class="bottom_center_div_head bottom_center_menu_select" ng-click="switchCheckTradeInfo($event, '1')">持仓明细</div>
+                            <div class="bottom_center_div_head" ng-click="switchCheckTradeInfo($event, '2')">交易明细</div>
+                            <div class="bottom_center_div_head_last"></div>
+                        </div>
+                        <div style=";height: 90%;">
+                            <table border="0" cellspacing="0" cellpadding="0" style=";width:100%;" align="center">
+
+                                <tr class="bottom_right_table_tr" >
+                                    <th>合约</th>
+                                    <th>方向</th>
+                                    <th>持仓</th>
+                                    <th>可用</th>
+                                    <th>开仓均价</th>
+                                    <th>浮动盈亏</th>
+                                    <th>止损/数量</th>
+                                    <th>名称</th>
+                                    <th ><div class="btn btn-default">全部卖出</div></th>
+                                </tr>
+                                <tr class="bottom_right_table_tr" ng-repeat="tradeInfo in tradeInfos">
+                                    <td ng-bind="tradeInfo.fistTd"></td>
+                                    <td ng-bind="tradeInfo.secondTd"></td>
+                                    <td ng-bind="tradeInfo.thirdTd"></td>
+                                    <td ng-bind="tradeInfo.fourthTd"></td>
+                                    <td ng-bind="tradeInfo.fifthTd"></td>
+                                    <td ng-bind="tradeInfo.sixthTd"></td>
+                                    <td ng-bind="tradeInfo.seventhTd"></td>
+                                    <td ng-bind="tradeInfo.eighthTd"></td>
+                                    <td><div class="btn btn-default">卖出</div></td>
+                                </tr>
+
+
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="float: left;width: 20%;height: 100%;">
+                <div style="height: 100%;">
+                    <div style="width: 90%;margin-left:10%;height: 50%;">
+                        <div style="height: 15%">
+                            <div class="bottom_right_div_head bottom_right_menu_select" ng-click="switchCheckCompanyInfo($event, '1')">公告中心</div>
+                            <div class="bottom_right_div_head" ng-click="switchCheckCompanyInfo($event, '2')">联系我们</div>
+                            <div class="bottom_right_div_head_last"></div>
+                        </div>
+                        <div style=";height: 70%;overflow: auto;font-size: 14px;display: inline-block" ng-show="companyInfo1" class="company_info">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本公司（其中包括但不限于公司的董事、执行官、雇员、顾问和代理商）和内容提供商对此项服务及其内容的真实性、准确性、完整性不做任何形式的担保。因为互联网以及卫星通讯方面的各种因素，所以不担保服务可靠性，对服务的及时性、安全性、出错发生都不作担保。<br>
+
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本公司（其中包括但不限于公司的董事、执行官、雇员、顾问和代理商）和内容提供商对用户依据此项服务及其内容进行金融投资所造成的盈亏不承担任何责任和义务。此项服务及其内容所包含的所有数据和信息仅供参考，并非建议或暗示用户做任何有关投资或理财的决定，用户所做的任何交易决定应自行负责。<br>
+
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本公司（其中包括但不限于公司的董事、执行官、雇员、咨询者和代理商）和内容提供商对于任何因使用或无法使用此项服务而直接或间接引起的赔偿、损失、债务或是任何交易中止均不承担责任和义务。<br>
+
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本公司授权用户在协议约定的服务期限内可以使用本软件及随本软件提供的服务。本软件作为客户端软件，是整体软件系统的一个组成部分；任何情况下，本公司不向任何客户转让本软件的所有权。
+
+                            此声明永久有效。
+                        </div>
+                        <div style=";height: 70%;overflow: auto;font-size: 14px;display: inline-block" ng-show="companyInfo2">
+
+                        </div>
+                    </div>
+                    <div style="border: 1px #6e6e6e solid;width: 90%;margin: 0 auto;height: 48%;">
+                        <div style="border: 1px #6e6e6e solid;margin: 2%;height: 92%;border-radius: 5px;">
+                            <div style="width: 60%;height: 80%;margin: 0 auto;margin-top: 20px;background: url('pic/qrcod.png') no-repeat center"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

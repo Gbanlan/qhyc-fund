@@ -21,6 +21,7 @@
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
   </dependencies>
+  
   <build>
     <finalName>qhyc-fund-ui</finalName>
   </build>

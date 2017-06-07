@@ -2,6 +2,7 @@ package com.qhyc.fund.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,14 +12,14 @@ import javax.persistence.Id;
 
 
 /**
- * 用户实体类
-* @ClassName: User 
+ * 用户实体
+* @ClassName: UserInfo 
 * @Description: TODO(这里用一句话描述这个类的作用) 
 * @author mz
-* @date 2017年6月1日 下午8:34:02 
+* @date 2017年6月7日 上午10:28:09 
 *
  */
-public class User implements Serializable{
+public class UserInfo implements Serializable{
 	
 	/** 
 	* <p>Title: </p> 
@@ -27,47 +28,120 @@ public class User implements Serializable{
 	*/
 	private static final long serialVersionUID = 1L;
 
-	private int id;
+	/**
+	 * 手机号码(主键)
+	 */
+	private int phone;
+	/**
+	 * 姓名
+	 */
+	private String fullName;
+	/**
+	 * 身份证号
+	 */
+	private String identityCard;
 	
-	private String name;
+	/**
+	 * 银行卡号
+	 */
+	private int bankCard;
 	
-	private String pwd;
+	/**
+	 * 持卡人姓名
+	 */
+	private String cardholderName;
 	
-	private int age;
+	/**
+	 * 开户行
+	 */
+	private String  openingBank;
+	/**
+	 * 开户行地址
+	 */
+	private String  bankAddr;
 	
-	private BigDecimal balance;
+	/**
+	 * 导出状态
+	 */
+	private String status;
 	
-	public int getId() {
-		return id;
+	/**
+	 * 注册时间
+	 */
+	private Date registerDate;
+
+
+	public int getPhone() {
+		return phone;
 	}
-	public void setId(int id) {
-		this.id = id;
+
+	public void setPhone(int phone) {
+		this.phone = phone;
 	}
-	public String getName() {
-		return name;
+
+	public String getFullName() {
+		return fullName;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
-	public String getPwd() {
-		return pwd;
+
+	public String getIdentityCard() {
+		return identityCard;
 	}
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
+
+	public void setIdentityCard(String identityCard) {
+		this.identityCard = identityCard;
 	}
-	public int getAge() {
-		return age;
+
+	public int getBankCard() {
+		return bankCard;
 	}
-	public void setAge(int age) {
-		this.age = age;
+
+	public void setBankCard(int bankCard) {
+		this.bankCard = bankCard;
 	}
-	public BigDecimal getBalance() {
-		return balance;
+
+	public String getCardholderName() {
+		return cardholderName;
 	}
-	public void setBalance(BigDecimal balance) {
-		this.balance = balance;
+
+	public void setCardholderName(String cardholderName) {
+		this.cardholderName = cardholderName;
 	}
-	
+
+	public String getOpeningBank() {
+		return openingBank;
+	}
+
+	public void setOpeningBank(String openingBank) {
+		this.openingBank = openingBank;
+	}
+
+	public String getBankAddr() {
+		return bankAddr;
+	}
+
+	public void setBankAddr(String bankAddr) {
+		this.bankAddr = bankAddr;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Date getRegisterDate() {
+		return registerDate;
+	}
+
+	public void setRegisterDate(Date registerDate) {
+		this.registerDate = registerDate;
+	}
 	
 
 }

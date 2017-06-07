@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" id="ng-app" ng-app="registerApp">
+<head>
+    <meta charset="UTF-8">
+    <title>注册界面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="commcss/bootstrap.min.css">
+    
+    <script src="commjs/angular.js"></script>
+    <script src="js/index.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+
+
+
+
+</style>
+
+</head>
+<body ng-controller="registerCtrl">
+<div class="container" style="border-left: 1px rgba(0,0,0,0.1) solid;border-right: 1px rgba(0,0,0,0.1) solid;style="font-size: 12px;"" >
+    <div class="row" style=";height: 100px;">
+        <div class="col-sm-4" style="height: 50px;">
+            logo
+        </div>
+        <div class="col-sm-8" >
+            
+        </div>
+        
+    </div>
+    <div class="row" >
+    	<div class="col-sm-4" style="height: 400px;">
+    	<div id="telephone" class="chooseBaiseInfo chooseBaiseInfoSelect" ng-click="chooseSwichUserInfoBtn($event, 'telephone')">
+    		<div class="col-sm-2 circleCss">1</div>
+    		<div class="col-sm-9">
+    			第一步：手机注册
+    		</div>
+    		
+    	</div>
+    	<div id="basciInfo" class="chooseBaiseInfo" ng-click="chooseSwichUserInfoBtn($event, 'basciInfo')">
+    	<div class="col-sm-2 circleCss" >2</div>
+    		<div class="col-sm-9">
+    			第二步：基本信息
+    		</div>
+    	</div>
+    	<div id="userCard" class="chooseBaiseInfo" ng-click="chooseSwichUserInfoBtn($event, 'userCard')">
+    	<div class="col-sm-2 circleCss" >3</div>
+    		<div class="col-sm-9">
+    			第三步：确认注册
+    		</div>
+    	</div>
+    </div>
+    <div class="col-sm-8" style="border-left:1px rgba(0,0,0,0.1) solid;min-height: 850px;color: rgba(0,0,0,0.5)">
+    	<div style=";height: 40%;;margin-top: 20%;" ng-show="isShowBindTelephone">
+    		<div class="row">
+    			<div class="col-sm-4" style="text-align: center; height: 40px;line-height: 40px;">
+    				<span ng-show="isTelephoneError" style="color: red">*</span>手机号
+    			</div>
+    			<div class="col-sm-8" style="height: 40px;">
+    				<input ng-model="telephoneNum"  style="width: 350px;height: 40px;" placeholder="请输入您的手机号" type="text" name="">
+    			</div>
+    		</div>
+    		<div class="row" style="margin-top: 20px;">
+    			<div class="col-sm-4" style="line-height: 40px;text-align: center;height: 40px; ">
+    				<span ng-show="isCheckedCordError" style="color: red">*</span>验证码
+    			</div>
+    			<div class="col-sm-3" style=" height: 40px;">
+    				<input ng-model="checkedCord" style="width: 155px;height: 40px;" placeholder="请输入您的手机验证码" type="text" name="">
+    			</div>
+    			<div class="col-sm-4" style="height: 40px;">
+    				<div class="col-sm-8" style="padding: 0;">
+    					<input style="width: 155px;height: 40px;"  type="button" name="" value="发送验证码" ng-click="sendCheckedCord()">
+    				</div>
+    				<div class="col-sm-4" style="">
+    					<div id="countDown" ng-bind="countDown" style="width: 30px;height: 20px;;margin-top: 20px;">60</div>
+    				</div>
+    				
+
+    			</div>
+    		</div>
+    		<div class="row" style="margin-top: 20px;">
+    			<div class="col-sm-4" style=" "></div>
+    			<div class="col-sm-4" style=" height: 40px;">
+    				<input style="width: 155px;height: 40px;" type="button" name="" value="下一步" ng-click="telephonePageNext()">
+    			</div>
+    			
+    		</div>
+    		
+    	</div>
+    	<div style="width: 100%;min-height: 500px;" ng-show="isShowWriteBasicInfo">
+    		<div class="row" style="margin-top:20px; ">
+    			<div class="col-sm-4 " style="text-align: center; height: 40px;line-height: 40px;">
+    				<span ng-show="isUserNameError" style="color: red">*</span>姓名
+    			</div>
+    			<div class="col-sm-8" style="height: 40px;">
+    				<input ng-model="userName" style="width: 350px;height: 40px;" type="" placeholder="请输入您的姓名" name="">
+    			</div>
+    		</div>
+    		<div class="row" style="margin-top:20px; ">
+    				<div class="col-sm-4 " style="text-align: center; height: 40px;line-height: 40px;">
+    					<span ng-show="isUserPresonalCardError" style="color: red">*</span>身份证
+    				</div>
+    			<div class="col-sm-8" style="height: 40px;">
+    				<input ng-model="userPresonalCard" style="width: 350px;height: 40px;" type="" placeholder="请输入真实有效的身份证号码" name="">
+    			</div>
+    			
+    		</div>
+    		<div class="row" style="margin-top:20px; ">
+    				<div class="col-sm-4 " style="text-align: center; height: 40px;line-height: 40px;">
+    					<span ng-show="isUserPostCardError" style="color: red">*</span>银行卡
+    				</div>
+    			<div class="col-sm-8" style="height: 40px;">
+    				<input ng-model="userPostCard" style="width: 350px;height: 40px;" type="" placeholder="请输入您的银行卡号" name="">
+    			</div>
+    			
+    		</div>
+    		<div class="row" style="margin-top:20px; ">
+    				<div class="col-sm-4 " style="text-align: center; height: 40px;line-height: 40px;">
+    					<span ng-show="isUserCardNameError" style="color: red">*</span>持卡人姓名
+    				</div>
+    			<div class="col-sm-8" style="height: 40px;">
+    				<input ng-model="userCardName" style="width: 350px;height: 40px;" type="" placeholder="请输入银行卡持卡人姓名" name="">
+    			</div>
+    			
+    		</div>
+    		<div class="row" style="margin-top:20px; ">
+    				<div class="col-sm-4 " style="text-align: center; height: 40px;line-height: 40px;">
+    					<span ng-show="isSelectPresonalCardError" style="color: red">*</span>开户行
+    				</div>
+    			<div class="col-sm-8" style="height: 40px;">
+    				
+    				<select id="selectPresonalCard"  style="width: 350px;height: 40px;" placeholder="请选择银行卡开户行">
+    					<option >中国工商银行</option>
+    					<option >中国农业银行</option>
+    					<option >中国银行</option>
+    					<option >中国建设银行</option>
+    					<option >招商银行</option>
+    					<option >中国光大银行</option>
+    					<option >中国民生银行</option>
+    					<option >恒丰银行</option>
+    					<option >中信银行</option>
+    					<option >上海浦东发展银行</option>
+    					<option >交通银行</option>
+    					<option >浙商银行</option>
+    					<option >兴业银行</option>
+    					<option >深圳发展银行</option>
+    					<option >广东发展银行</option>
+    					<option >广东发展银行</option>
+    					<option >广东发展银行</option>
+    					<option >广东发展银行</option>
+    					<option >东亚银行</option>
+    					<option >南洋商业银行</option>
+    				</select>
+    			</div>
+    		</div>
+    		<div class="row" style="margin-top:20px; ">
+    				<div class="col-sm-4 " style="text-align: center; height: 40px;line-height: 40px;">
+    					<span ng-show="isUserCardBandAdrError" style="color: red">*</span>开户行地址
+    				</div>
+    			<div class="col-sm-8" style="height: 140px;">
+    				<textarea ng-model="userCardBandAdr" style="width: 350px;height: 140px;" placeholder="请输入开户行地址"></textarea>
+    			</div>
+    			
+    		</div>
+    		<div class="row" style="margin-top: 50px;text-align: center;line-height: 40px;">
+    			<input type="button" style="height: 40px;width: 150px;" name="" value="下一步" ng-click="basciInfoPageNext()">
+    		</div>
+    	</div>
+    	<div style="width: 100%;" ng-show="isShowUserCard">
+    		<div class="row" style="text-align: center;">
+    			<p><h2>请阅读并同意风险通知书</h2></p>
+    		</div>
+    		<div class="row">
+    			<div class="col-sm-10" style="margin-left: 8%;background: rgba(0,0,0,0.1);">
+    				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;期货市场行情具有不确定性，高投资收益的同时必然伴随着高投资风险，您应当在操作当前对自身的经济承受能力和心理承受能力做出客观判断，对于自己投资的资金金额做出谨慎决定，您必须认真阅读《风险提示书》并签字，在您投资股市之前一定要知道“市场有风险，入市需谨慎”。尊敬的投资者： 仓单质押与普通期货交易不同，具有财务杠杆放大效应，投资者虽然有机会以约定的杠杆获取较大的收益可能在也有可能在短时间内蒙受巨额的损失。投资者在参与交易前应审慎评估自身的经济状况和财务能力，充分考虑是否适宜参与此类杠杆性交易。在决定从事仓单质押交易前，投资者应充分了解以下事项：<br> 
+    			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一、仓单质押具有期货类产品普通交易所具备的政策风险、市场风险、违约风险、期货公司业务资格合法性风险、系统风险等各种风险；同时还具有投资风险放大等风险。<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;二、甲方在从事交易期间，如果不能按照约定的期限清偿债务，或不能按照约定的时间、数量追加保证金时，或未按照合同约定履约的，将面临被乙方强制平仓或提前终止合同的风险。<br> 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;三、甲方在从事交易期间，如果信用资质状况降低，乙方将相应提高对投资者的质押金，或者乙方提高相关警戒指标、平仓指标，可能会对甲方造成经济损失，该损失由甲方自行承担。<br> 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;四、甲方在从事交易期间，如果因为自身原因导致其资产被司法机关采取财产保全或强制执行措施，或者出现丧失民事行为能力、破产、解散等情况时，甲方将面临被乙方提前了结交易的风险，可能会给投资者造成经济损失，该损失由甲方自行承担。<br> 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;五、甲方应妥善保管资金账号和交易密码，如甲方将账户和交易密码、交易给他人使用或遗失等，由此造成的后果由甲方自行承担。<br> 
+				六、甲方从事交易期间，由于我国宏观经济形势的变化以及其他国家、地区宏观经济环境和市场的变化，可能会引起国内市场的波动，可能会给甲方造成经济损失，该损失由甲方自行承担。<br> 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;七、甲方从事交易期间，有关市场的法律、法规及相关政策、规则发生变化，可能引起市场价格波动，可能给甲方造成经济损失，该损失由甲方自行承担。 <br> 
+			 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;八、甲方从事交易期间，由于交易撮合、清算交收、行情揭示及银期转账是通过电子通讯技术和电脑技术来实现的，这些技术存在着被网络黑客和计算机病毒攻击的可能，同时通讯技术、电脑技术和相关软件具有存在缺陷		的可能，这些风险可能给甲方带来损失或银证转账资金不能即时到账，该损失甲方自行承担。<br> 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;九、甲方从事交易期间，诸如地震、台风、火灾、水灾、战争、瘟疫、社会动乱等不可抗力因素可能导致交易系统的瘫痪；乙方无法控制和不可预测的系统故障、设备故障、通讯故障、电力故障等也可能导致交易		系统非正常运行甚至瘫痪；乙方和银行无法控制和不可预测的系统故障、设备故障、通讯故障、电力故障等也可能导致银期转账系统非正常运行甚至瘫痪；这些都会使甲方的交易委托无法成交或者无法全部成交，或者银期转账资金不能即时到账，由此导致的损失和不便，由甲方自行承担。<br> 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;十、甲方从事交易期间，由于甲方密码保管不当、操作不当、投资决策失误、违反合作约定等原因而造成的损失；网上委托、热键操作完毕后未及时退出，他人进行恶意操作而造成的损失；网上交易未及时退出可能遭遇黑		客攻击而造成的损失；委托他人进行的交易而造成的损失等，都将有甲方自行承担。<br> 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;十一、仓单质押系统具有操盘手展示及程序化下单功能，甲方应保持谨慎态度对待此功能，如有需求使用此功能，需自行对操盘手的操盘能力及盈利能力进行考察，由此产生的盈利及亏损均需甲方自行承担。 	期货市场是一		个风险无时不在的市场。您在进行交易时存在盈利的可能，也存在亏损的风险。本风险提示书并不可能揭示从事期货交易的全部风险及期货市场对的全部情形。您务必对此有清醒的认识，认真考虑是否进行仓单质押交易。
+					
+				</p>
+				<p style="text-align: center;">市场有风险，入市需谨慎！本人已仔细阅读并完全理解，愿意承担期货市场及仓单质押的各种风险!</p>
+    			</div>
+    			
+    		</div>
+    		<div class="row" style="margin-top: 20px;">
+    			<div class="col-sm-4" style=";margin-left: 40%;height: 40px;line-height: 40px;line-height: 40px;">
+    				<input type="checkbox" name="">
+    				<span>已阅读并同意该说明书</span>
+    			</div>
+    		</div>
+    		<div class="row" style="margin-top: 20px;text-align: center;">
+    			<div class="col-sm-6">
+    				<input type="button" style="height: 40px;width: 100px;" name="" value="上一步">
+    			</div>
+    			<div class="col-sm-6">
+    				<input type="button" style="height: 40px;width: 100px;" name="" value="确认注册">
+    			</div>
+    			
+    		</div>
+    		<div class="row" style="height: 50px;"></div>
+    	</div>
+    </div>
+    </div>
+    
+    
+</div>
+
+
+<script src="commjs/jquery-3.2.1.min.js"></script>
+
+<script src="commjs/bootstrap.min.js"></script>
+</body>
+</html>

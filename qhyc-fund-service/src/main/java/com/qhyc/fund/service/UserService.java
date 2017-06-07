@@ -1,6 +1,7 @@
 package com.qhyc.fund.service;
 
-import com.qhyc.fund.entity.User;
+import com.qhyc.fund.entity.UserInfo;
+import com.qhyc.fund.uitl.JsonResult;
 
 public interface UserService {
 	  /**
@@ -8,6 +9,9 @@ public interface UserService {
      * @param id 用户id
      * @return 用户实体
      */
-    public User findById(int id);
+    public UserInfo findById(int phone);
+    
+    
+    public JsonResult insertUserInfo(UserInfo userInfo);
 
 }

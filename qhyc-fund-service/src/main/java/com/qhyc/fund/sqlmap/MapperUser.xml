@@ -12,12 +12,13 @@
 		<result property="cardholderName" column="cardholder_name" />
 		<result property="openingBank" column="opening_bank" />
 		<result property="bankAddr" column="bank_addr" />
-		<result property="status" column="status" />
+		<result property="exportStatus" column="export_status" />
+		<result property="validStatus" column="valid_status" />
 		<result property="registerDate" column="register_date" />
 
 	</resultMap>
 
-	<select id="findUserInfoById" parameterType="int" resultMap="userMap">
+	<select id="findUserInfoById" parameterType="String" resultMap="userMap">
 		select * from user_info where phone = #{phone};
 	</select>
 	
@@ -31,18 +32,32 @@
 		cardholder_name,
 		opening_bank,
 		bank_addr,
-		status,
+		export_status,
+		valid_status,
 		register_date)
 		values (
-		#{id,jdbcType=BIGINT},
 		#{phone,jdbcType=VARCHAR},
 		#{fullName,jdbcType=VARCHAR},
 		#{identityCard,jdbcType=VARCHAR},
-		#{bankCard,jdbcType=BIGINT},
+		#{bankCard,jdbcType=VARCHAR},
 		#{cardholderName,jdbcType=VARCHAR},
 		#{openingBank,jdbcType=VARCHAR},
 		#{bankAddr,jdbcType=VARCHAR},
-		#{status,jdbcType=VARCHAR},
+		#{exportStatus,jdbcType=VARCHAR},
+		#{validStatus,jdbcType=VARCHAR},
 	    now())
 	</insert>
+	
+	 <update id="updateUserInfo" parameterType="userInfo" >
+	    update user_info
+	    <set >
+	      <if test="exportStatus != null" >
+	        export_status = #{exportStatus,jdbcType=VARCHAR},
+	      </if>
+	      <if test="exportStatus != null" >
+	        valid_status = #{validStatus,jdbcType=VARCHAR}
+	      </if>
+	    </set>
+	    where phone=#{phone,jdbcType=VARCHAR}
+  </update>
 </mapper>

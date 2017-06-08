@@ -26,8 +26,23 @@
             <artifactId>tomcat-servlet-api</artifactId>
             <version>8.5.4</version>
     </dependency>
+      <!-- 映入JSON支持 --> 
+      <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-annotations</artifactId>
+          <version>2.5.2</version>
+      </dependency>
+      <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-databind</artifactId>
+          <version>2.5.2</version>
+      </dependency> 
+      <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-core</artifactId>
+          <version>2.5.2</version>
+      </dependency>
   </dependencies>
-  
   <build>
     <finalName>qhyc-fund-ui</finalName>
     <!-- 配置插件 -->  

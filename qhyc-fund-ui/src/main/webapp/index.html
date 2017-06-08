@@ -2,7 +2,7 @@
 <html lang="en" id="ng-app" ng-app="registerApp">
 <head>
     <meta charset="UTF-8">
-    <title>注册界面</title>
+    <title>闪电手</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="commcss/bootstrap.min.css">
     
@@ -17,34 +17,35 @@
 </style>
 
 </head>
-<body ng-controller="registerCtrl">
-<div class="container" style="border-left: 1px rgba(0,0,0,0.1) solid;border-right: 1px rgba(0,0,0,0.1) solid;style="font-size: 12px;"" >
-    <div class="row" style=";height: 100px;">
-        <div class="col-sm-4" style="height: 50px;">
-            logo
+<body ng-controller="registerCtrl" style="background: url(pic/bg.jpg)">
+<div class="container" style="border-left: 1px rgba(0,0,0,0.1) solid;border-right: 1px rgba(0,0,0,0.1) solid;;background: #fff;" >
+    <div class="row" style=";height: 100px;box-shadow:0px 2px 2px 0px #666666;border-bottom: 1px #fff solid;">
+        <div class="col-sm-4" style="height: 100px;;background: url(pic/banner.png) no-repeat center ;">
+            
         </div>
         <div class="col-sm-8" >
             
         </div>
         
     </div>
-    <div class="row" >
+    <div class="row" style="background-color: #f6f6f6;margin-top: 5px;">
     	<div class="col-sm-4" style="height: 400px;">
-    	<div id="telephone" class="chooseBaiseInfo chooseBaiseInfoSelect" ng-click="chooseSwichUserInfoBtn($event, 'telephone')">
-    		<div class="col-sm-2 circleCss">1</div>
+    	<div id="telephone" class="chooseBaiseInfo" ng-click="chooseSwichUserInfoBtn($event, 'telephone')">
+    		<div id ="telephoneCircle" class="col-sm-2 circleCss">1</div>
     		<div class="col-sm-9">
-    			第一步：手机注册
+    		<span style="font-family: 微软雅黑">第一步：手机注册</span>
+    			
     		</div>
     		
     	</div>
     	<div id="basciInfo" class="chooseBaiseInfo" ng-click="chooseSwichUserInfoBtn($event, 'basciInfo')">
-    	<div class="col-sm-2 circleCss" >2</div>
+    	<div id ="basciInfoCircle" class="col-sm-2 circleCss" >2</div>
     		<div class="col-sm-9">
     			第二步：基本信息
     		</div>
     	</div>
-    	<div id="userCard" class="chooseBaiseInfo" ng-click="chooseSwichUserInfoBtn($event, 'userCard')">
-    	<div class="col-sm-2 circleCss" >3</div>
+    	<div id="userSubmit" class="chooseBaiseInfo" ng-click="chooseSwichUserInfoBtn($event, 'userSubmit')">
+    	<div id ="userSubmitCircle" class="col-sm-2 circleCss" >3</div>
     		<div class="col-sm-9">
     			第三步：确认注册
     		</div>
@@ -87,7 +88,7 @@
     		</div>
     		
     	</div>
-    	<div style="width: 100%;min-height: 500px;" ng-show="isShowWriteBasicInfo">
+    	<div style="width: 100%;min-height: 500px;" ng-show="isShowWriteBasicInfo" class="ng-hide">
     		<div class="row" style="margin-top:20px; ">
     			<div class="col-sm-4 " style="text-align: center; height: 40px;line-height: 40px;">
     				<span ng-show="isUserNameError" style="color: red">*</span>姓名
@@ -125,11 +126,11 @@
     		</div>
     		<div class="row" style="margin-top:20px; ">
     				<div class="col-sm-4 " style="text-align: center; height: 40px;line-height: 40px;">
-    					<span ng-show="isSelectPresonalCardError" style="color: red">*</span>开户行
+    					<span ng-show="isUserPostCardBankError" style="color: red">*</span>开户行
     				</div>
     			<div class="col-sm-8" style="height: 40px;">
     				
-    				<select id="selectPresonalCard"  style="width: 350px;height: 40px;" placeholder="请选择银行卡开户行">
+    				<select id="userPostCardBank"  style="width: 350px;height: 40px;" placeholder="请选择银行卡开户行">
     					<option >中国工商银行</option>
     					<option >中国农业银行</option>
     					<option >中国银行</option>
@@ -166,7 +167,7 @@
     			<input type="button" style="height: 40px;width: 150px;" name="" value="下一步" ng-click="basciInfoPageNext()">
     		</div>
     	</div>
-    	<div style="width: 100%;" ng-show="isShowUserCard">
+    	<div style="width: 100%;" ng-show="isShowUserCard" class="ng-hide">
     		<div class="row" style="text-align: center;">
     			<p><h2>请阅读并同意风险通知书</h2></p>
     		</div>
@@ -192,16 +193,16 @@
     		</div>
     		<div class="row" style="margin-top: 20px;">
     			<div class="col-sm-4" style=";margin-left: 40%;height: 40px;line-height: 40px;line-height: 40px;">
-    				<input type="checkbox" name="">
+    				<input id="checkbox" type="checkbox" name="">
     				<span>已阅读并同意该说明书</span>
     			</div>
     		</div>
     		<div class="row" style="margin-top: 20px;text-align: center;">
-    			<div class="col-sm-6">
-    				<input type="button" style="height: 40px;width: 100px;" name="" value="上一步">
-    			</div>
-    			<div class="col-sm-6">
-    				<input type="button" style="height: 40px;width: 100px;" name="" value="确认注册">
+    			<!-- <div class="col-sm-6">
+    				<input type="button" style="height: 40px;width: 100px;" name="" value="上一步" ng-click="lastPage()">
+    			</div> -->
+    			<div class="col-sm-12">
+    				<input type="button" style="height: 40px;width: 100px;" name="" value="确认注册" ng-click="makeSuerSubmit()">
     			</div>
     			
     		</div>

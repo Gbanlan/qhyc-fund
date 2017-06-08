@@ -15,7 +15,7 @@ public class SmsSample {
 
 		String testUsername = "gaolei00"; //在短信宝注册的用户名
 		String testPassword = "123000"; //在短信宝注册的密码
-		String testPhone = "17722517325";
+		String testPhone = "17711604191";
 		String httpUrl = "http://api.smsbao.com/sms";
 
 		StringBuffer httpArg = new StringBuffer();
@@ -26,7 +26,6 @@ public class SmsSample {
 		testContent.append("【闪电手】您的验证码为");
 		testContent.append(getRandNum());
 		testContent.append("，3分钟内有效，请尽快验证。如非本人操作，请忽略本条消息。");
-		//String testContent="【闪电手】您的验证码为635451，3分钟内有效，请尽快验证。如非本人操作，请忽略本条消息。";
 		httpArg.append("c=").append(encodeUrlString(testContent.toString(), "UTF-8"));
 
 		String result = request(httpUrl, httpArg.toString());

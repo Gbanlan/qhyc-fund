@@ -53,7 +53,7 @@
         <!-- 指明mybatis主配置文件路径 -->
         <property name="configLocation" value="classpath:mybatis.cfg.xml"/>
         <!-- 指明mybatis的映射位置 -->
-        <property name="mapperLocations" value="classpath:com/qhyc/fund/sqlmap/*.xml"/>
+        <property name="mapperLocations" value="classpath*:com/qhyc/fund/sqlmap/*.xml"/>
     </bean>
 
     <!-- 配置SqlSession模版类,SqlSessionTemplate是线程安全类 -->

@@ -21,17 +21,17 @@ import javax.persistence.Id;
  */
 public class UserInfo implements Serializable{
 	
+
 	/** 
 	* <p>Title: </p> 
 	* <p>Description: </p> 
 	* 
 	*/
 	private static final long serialVersionUID = 1L;
-
 	/**
 	 * 手机号码(主键)
 	 */
-	private int phone;
+	private String phone;
 	/**
 	 * 姓名
 	 */
@@ -44,7 +44,7 @@ public class UserInfo implements Serializable{
 	/**
 	 * 银行卡号
 	 */
-	private int bankCard;
+	private String bankCard;
 	
 	/**
 	 * 持卡人姓名
@@ -63,19 +63,23 @@ public class UserInfo implements Serializable{
 	/**
 	 * 导出状态
 	 */
-	private String status;
+	private String exportStatus;
+	
+	/**
+	 * 有效状态
+	 */
+	private String validStatus;
 	
 	/**
 	 * 注册时间
 	 */
 	private Date registerDate;
 
-
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
@@ -95,11 +99,11 @@ public class UserInfo implements Serializable{
 		this.identityCard = identityCard;
 	}
 
-	public int getBankCard() {
+	public String getBankCard() {
 		return bankCard;
 	}
 
-	public void setBankCard(int bankCard) {
+	public void setBankCard(String bankCard) {
 		this.bankCard = bankCard;
 	}
 
@@ -127,12 +131,20 @@ public class UserInfo implements Serializable{
 		this.bankAddr = bankAddr;
 	}
 
-	public String getStatus() {
-		return status;
+	public String getExportStatus() {
+		return exportStatus;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setExportStatus(String exportStatus) {
+		this.exportStatus = exportStatus;
+	}
+
+	public String getValidStatus() {
+		return validStatus;
+	}
+
+	public void setValidStatus(String validStatus) {
+		this.validStatus = validStatus;
 	}
 
 	public Date getRegisterDate() {
@@ -142,6 +154,7 @@ public class UserInfo implements Serializable{
 	public void setRegisterDate(Date registerDate) {
 		this.registerDate = registerDate;
 	}
-	
+
+     
 
 }

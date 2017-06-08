@@ -18,11 +18,22 @@
 
 	</resultMap>
 
-	<select id="findUserInfoById" parameterType="String" resultMap="userMap">
-		select * from user_info where phone = #{phone};
+	<select id="exportUserInfo" parameterType="userInfo" resultMap="userMap">
+		SELECT
+		phone,
+		full_name,
+		identity_card,
+		bank_card,
+		cardholder_name,
+		opening_bank,
+		bank_addr
+		FROM
+		user_info
+		WHERE
+		export_status = #{exportStatus}
 	</select>
-	
-	 <!--用户注册插入  -->
+
+	<!--用户注册插入 -->
 	<insert id="insertUserInfo" parameterType="userInfo">
 		insert into user_info
 		(phone,
@@ -45,19 +56,22 @@
 		#{bankAddr,jdbcType=VARCHAR},
 		#{exportStatus,jdbcType=VARCHAR},
 		#{validStatus,jdbcType=VARCHAR},
-	    now())
+		now())
 	</insert>
-	
-	 <update id="updateUserInfo" parameterType="userInfo" >
-	    update user_info
-	    <set >
-	      <if test="exportStatus != null" >
-	        export_status = #{exportStatus,jdbcType=VARCHAR},
-	      </if>
-	      <if test="exportStatus != null" >
-	        valid_status = #{validStatus,jdbcType=VARCHAR}
-	      </if>
-	    </set>
-	    where phone=#{phone,jdbcType=VARCHAR}
-  </update>
+
+	<update id="updateUserInfo" parameterType="userInfo">
+		update user_info
+		<set>
+			<if test="exportStatus != null">
+				export_status = #{exportStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="validStatus != null">
+				valid_status = #{validStatus,jdbcType=VARCHAR},
+			</if>
+			register_date= now()
+		</set>
+		<if test="phone != null">
+		   where phone=#{phone,jdbcType=VARCHAR}
+		</if>
+	</update>
 </mapper>

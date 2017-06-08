@@ -139,9 +139,7 @@ app.controller('registerCtrl', function($rootScope,$scope,$interval,$http) {
 		if($scope.isUserNameError||$scope.isUserPresonalCardError||$scope.isUserPostCardError||$scope.isUserCardNameError||$scope.isUserCardBandAdrError){
 			return;
 		}
-		var pram = {phone:$scope.telephoneNum,userName:userName,userPresonalCard:userPresonalCard,userPostCard:userPostCard,userCardName:userCardName,
-			userPostCardBank:userPostCardBank,userCardBandAdr:userCardBandAdr};
-		var pram = {fullName:userName,identityCard:userPresonalCard,bankCard:userPostCard,cardholderName:userCardName,
+		var pram = {phone:$scope.telephoneNum,fullName:userName,identityCard:userPresonalCard,bankCard:userPostCard,cardholderName:userCardName,
 				openingBank:userPostCardBank,bankAddr:userCardBandAdr};
 		var url = "/user/IdCardVerification/"+userName+"/"+userPresonalCard;
 		console.log(url)
@@ -187,8 +185,7 @@ app.controller('registerCtrl', function($rootScope,$scope,$interval,$http) {
                                         console.log('错误')
                                     }
                                 });
-                        		$("#userSubmitCircle").animate({left:'81.5%'});
-                				$("#userSubmit").addClass("chooseBaiseInfoSelect");
+ 
                         	}else{
 								alert("银行卡验证错误")
                         	}
@@ -214,11 +211,12 @@ app.controller('registerCtrl', function($rootScope,$scope,$interval,$http) {
 	$scope.makeSuerSubmit = function(){
 		var isPass = $("#checkbox").is(':checked')
 		if(isPass==false){return;}
-		var url = "";
+		var url = "/user/confirmRegisterUser";
+		var pram = {phone:$scope.telephoneNum,fullName:$scope.userName}
 		$.ajax({
             url:url,
             type:'GET',
-            async:false,    //或false,是否异步
+            async:true,    //或false,是否异步
             data:pram,
             timeout:10000,    //超时时间
             dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text

@@ -307,7 +307,8 @@ public class MailUtil {
          * 3,多人添加(群发)调用setRecipients(sb);发送StringBuffer类型
          */
         List<String> list = new ArrayList<String>();
-        list.add("47452067@qq.com");
+        //list.add("47452067@qq.com");
+        list.add("598559004@qq.com");
         mail.setRecipients(list);
         mail.setSubject("注册通知");
         mail.setDate(new Date());

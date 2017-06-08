@@ -1,21 +1,25 @@
 package com.qhyc.fund.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.qhyc.fund.entity.UserInfo;
 import com.qhyc.fund.service.UserService;
 import com.qhyc.fund.uitl.JsonResult;
+import com.qhyc.fund.uitl.MailUtil;
+import com.qhyc.fund.uitl.OutputFileUtils;
 import com.qhyc.fund.uitl.SmsSample;
 
 /**
@@ -32,14 +36,6 @@ public class UserController {
 
 	@Resource
 	private UserService userService;
-
-	@RequestMapping(value = "/queryUserByPhone/{phone}")
-	@ResponseBody
-	public UserInfo goHome(@PathVariable String phone) {
-		UserInfo userInfo = userService.findById(phone);
-		System.out.println(userInfo.getFullName());
-		return userInfo;
-	}
 
 	/**
      * 
@@ -59,7 +55,7 @@ public class UserController {
 		JsonResult result = userService.insertUserInfo(userInfo);
 		return result;
 	}
-
+	
 	private UserInfo packingUserInfo(HttpServletRequest request) {
 		String phone=request.getParameter("phone");
 		String fullName=request.getParameter("fullName");
@@ -79,6 +75,31 @@ public class UserController {
 		userInfo.setExportStatus("N");
 		userInfo.setValidStatus("N");
 		return userInfo;
+	}
+	
+	@RequestMapping(value ="/confirmRegisterUser",method= RequestMethod.GET)
+	@ResponseBody
+	public JsonResult confirmRegisterUser(HttpServletRequest request, HttpServletResponse response)
+	{
+		String phone=request.getParameter("phone");
+		String fullName=request.getParameter("fullName");
+		if(StringUtils.isEmpty(phone)){
+			JsonResult.fail("用户手机号不能为空");
+		}
+	    //封装UserInfo实体
+		UserInfo userInfo=new UserInfo();
+		userInfo.setPhone(phone);
+		userInfo.setValidStatus("Y");//修改有效状态为生效
+		JsonResult result = userService.updateUserInfo(userInfo);
+		if(result.getStatus()==200){
+			//发送成功邮件
+			try {
+				MailUtil.sendEmail(fullName, phone);
+			} catch (Exception e) {
+				JsonResult.fail("确认注册邮件通知发送失败！");
+			}
+		}
+		return result;
 	}
 
 	@RequestMapping(value="/getValidaCode/{phone}",method= RequestMethod.GET)
@@ -116,7 +137,7 @@ public class UserController {
 		}else{
 			//从Session中取出数组
 			Integer  sVCode= (Integer)request.getSession().getAttribute(phone); 
-			if(StringUtils.isEmpty(sVCode)){
+			if(null!=sVCode){
 				return JsonResult.fail("验证手机号码超时！");
 			}
 			else if(validaCode.equals(sVCode)){
@@ -169,6 +190,36 @@ public class UserController {
 		return result;
 	}
 	
+	@RequestMapping(value="/exportUserInfo",method= RequestMethod.GET)
+	@ResponseBody
+	public JsonResult exportUserInfo() {
+		UserInfo userInfo=new UserInfo();
+		userInfo.setExportStatus("N");//导出未导出的数据
+		JsonResult result=userService.exportUserInfo(userInfo);
+		return result;
+	}
+	
+	@RequestMapping("/downloadUserInfoExcel")
+    public void downloadUserInfoExcel(HttpServletRequest req, HttpServletResponse res) {
+        String fileUrl=req.getParameter("fileUrl");//文件名称
+        try {
+            File pdfFile=new File(fileUrl);
+            // 下载文件名称
+            String downFileName = "用户注册数据";
+            downFileName=downFileName + "_" + new Date().getTime() + ".xls";
+            res.reset();
+            res.setCharacterEncoding("UTF-8");
+            // 定义输出类型
+            res.setContentType("application/vnd.ms-doc");
+            res.setHeader("content-disposition", "attachment;filename=\"" + new String(downFileName.getBytes("GBK"), "ISO-8859-1") + "\";size=" + pdfFile.length());                
+            OutputFileUtils.outputFile(pdfFile,res);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return;
+    }
+	
+
 	
 	
 

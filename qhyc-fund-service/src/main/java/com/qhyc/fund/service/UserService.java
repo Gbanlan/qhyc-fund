@@ -11,12 +11,6 @@ import com.qhyc.fund.uitl.JsonResult;
 *
  */
 public interface UserService {
-	  /**
-     * @Desciption 按照用户id查找该用户
-     * @param id 用户id
-     * @return 用户实体
-     */
-    public UserInfo findById(String phone);
     
     /**
     * @Title: insertUserInfo 
@@ -29,7 +23,6 @@ public interface UserService {
     public JsonResult insertUserInfo(UserInfo userInfo);
     
     /**
-     * 
     * @Title: idAuthentication 
     * @Description: TODO(身份证实名验证) 
     * @param @param userInfo
@@ -40,14 +33,34 @@ public interface UserService {
     public JsonResult IdCardVerification(UserInfo userInfo);
     
     /**
-     * 银行卡实名认证
     * @Title: bankCardVerification 
-    * @Description: TODO(这里用一句话描述这个方法的作用) 
+    * @Description: TODO(银行卡实名认证) 
     * @param @param userInfo
     * @param @return    设定文件 
     * @return JsonResult    返回类型 
     * @throws
      */
     public JsonResult bankCardVerification(UserInfo userInfo);
+    
+    /**
+     * 
+    * @Title: updateUserInfo 
+    * @Description: TODO(确认注册更新) 
+    * @param @param userInfo
+    * @param @return    设定文件 
+    * @return JsonResult    返回类型 
+    * @throws
+     */
+    public JsonResult updateUserInfo(UserInfo userInfo);
+    
+    /**
+    * @Title: exportUserInfo 
+    * @Description: TODO(导出Excel数据) 
+    * @param @param userInfo
+    * @param @return    设定文件 
+    * @return JsonResult    返回类型 
+    * @throws
+     */
+    public JsonResult exportUserInfo(UserInfo userInfo);
 
 }
